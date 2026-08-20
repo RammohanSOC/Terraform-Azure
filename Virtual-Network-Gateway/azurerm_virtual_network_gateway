@@ -1,0 +1,4 @@
+
+#The Azure VPN Gateway itself is represented by the Terraform resource:
+
+azurerm_virtual_network_gateway
