@@ -1,0 +1,34 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "bastionHosts_vnet_prod_bastion_name": {
+            "defaultValue": "vnet-prod-bastion",
+            "type": "String"
+        },
+        "virtualNetworks_vnet_prod_externalid": {
+            "defaultValue": "/subscriptions/08c6d156-4516-49af-9fc4-ca821ce69d82/resourceGroups/rg-prod/providers/Microsoft.Network/virtualNetworks/vnet-prod",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/bastionHosts",
+            "apiVersion": "2025-07-01",
+            "name": "[parameters('bastionHosts_vnet_prod_bastion_name')]",
+            "location": "centralindia",
+            "sku": {
+                "name": "Developer"
+            },
+            "properties": {
+                "dnsName": "omnibrain.centralindia.bastionglobal.azure.com",
+                "scaleUnits": 2,
+                "virtualNetwork": {
+                    "id": "[parameters('virtualNetworks_vnet_prod_externalid')]"
+                },
+                "ipConfigurations": []
+            }
+        }
+    ]
+}

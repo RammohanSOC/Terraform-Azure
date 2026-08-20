@@ -1,0 +1,35 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "natGateways_nat_prod_name": {
+            "defaultValue": "nat-prod",
+            "type": "String"
+        },
+        "publicIPAddresses_pip_prod_externalid": {
+            "defaultValue": "/subscriptions/08c6d156-4516-49af-9fc4-ca821ce69d82/resourceGroups/rg-prod/providers/Microsoft.Network/publicIPAddresses/pip-prod",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/natGateways",
+            "apiVersion": "2025-07-01",
+            "name": "[parameters('natGateways_nat_prod_name')]",
+            "location": "centralindia",
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
+            },
+            "properties": {
+                "idleTimeoutInMinutes": 4,
+                "publicIpAddresses": [
+                    {
+                        "id": "[parameters('publicIPAddresses_pip_prod_externalid')]"
+                    }
+                ]
+            }
+        }
+    ]
+}
